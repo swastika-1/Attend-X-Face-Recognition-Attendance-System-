@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 import mysql.connector
 import cv2
+from export_students_excel import export_students
 
 
 
@@ -34,7 +35,7 @@ class Student:
 
 
          # Image
-        img = Image.open(r"C:\Users\KIIT0001\Desktop\images\500805811_18354636976196964_2874614255997732042_n.jpg")
+        img = Image.open("images\\500805811_18354636976196964_2874614255997732042_n.jpg")
         img = img.resize((425, 200), Image.ANTIALIAS)
         self.photoimg = ImageTk.PhotoImage(img)
 
@@ -43,7 +44,7 @@ class Student:
 
 
         # Image1
-        img1 = Image.open(r"C:\Users\KIIT0001\Desktop\images\bg.jpeg")
+        img1 = Image.open("images\\bg.jpeg")
         img1 = img1.resize((420, 200), Image.ANTIALIAS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -52,7 +53,7 @@ class Student:
 
 
         # Image2
-        img2 = Image.open(r"C:\Users\KIIT0001\Desktop\images\501301941_18354636910196964_6884374772658807174_n.jpg")
+        img2 = Image.open("images\\501301941_18354636910196964_6884374772658807174_n.jpg")
         img2 = img2.resize((430, 200), Image.ANTIALIAS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -62,7 +63,7 @@ class Student:
 
 
          # bg image
-        img3 = Image.open(r"C:\Users\KIIT0001\Desktop\images\kiit.jpeg")
+        img3 = Image.open("images\kiit.jpeg")
         img3 = img3.resize((1530, 640), Image.ANTIALIAS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
@@ -89,12 +90,12 @@ class Student:
         Left_frame=LabelFrame(main_frame,bd=2,bg="white",relief=RIDGE,text="Student Details",font=("times new roman",12,"bold"))
         Left_frame.place(x=10,y=10,width=600,height=440)
 
-        img4 = Image.open(r"C:\Users\KIIT0001\Desktop\images\atten.jpg")
+        img4 = Image.open("images\\atten.jpg")
         img4 = img4.resize((590, 100), Image.ANTIALIAS)
         self.photoimg4 = ImageTk.PhotoImage(img4)
 
-        f_lbl = Label(self.root, image=self.photoimg4)
-        f_lbl.place(x=20, y=225, width=590, height=100)
+        f_lbl = Label(Left_frame, image=self.photoimg4)
+        f_lbl.place(x=5, y=0, width=590, height=100)
 
         #current course
         current_course_frame=LabelFrame(Left_frame,bd=2,bg="white",relief=RIDGE,text=" Current course information",font=("times new roman",12,"bold"))
@@ -281,7 +282,7 @@ class Student:
         RIGHT_frame.place(x=620,y=10,width=620,height=440)
 
 
-        img5 = Image.open(r"C:\Users\KIIT0001\Desktop\images\ttl.jpg")
+        img5 = Image.open("images\\ttl.jpg")
         img5 = img5.resize((610, 100), Image.ANTIALIAS)
         self.photoimg5 = ImageTk.PhotoImage(img5)
 
@@ -402,6 +403,10 @@ class Student:
                self.fetch_data()
                conn.close()
                messagebox.showinfo("Success","Student details has been added Successfully",parent=self.root)
+               try:
+                   export_students()
+               except Exception:
+                   pass
             except Exception as es:
                 messagebox.showerror("Error",f"Due to:{str(es)}",parent=self.root)
     
@@ -480,6 +485,10 @@ class Student:
                 conn.commit()
                 self.fetch_data()
                 conn.close()
+                try:
+                    export_students()
+                except Exception:
+                    pass
             except Exception as es:
                 messagebox.showerror("Error",f"Due To:{str(es)}",parent=self.root)
                     
@@ -505,6 +514,10 @@ class Student:
                 self.fetch_data()
                 conn.close()
                 messagebox.showinfo("Delete","Successfully deleted student details!",parent=self.root)
+                try:
+                    export_students()
+                except Exception:
+                    pass
             except Exception as es:
                 messagebox.showerror("Error",f"Due to:{str(es)}",parent=self.root)
 
@@ -600,12 +613,6 @@ class Student:
                         except Exception as es:
                             messagebox.showerror("Error",f"Due to:{str(es)}",parent=self.root)
                         
-
-
-
-                
-                             
-
 
 
         
