@@ -8,6 +8,7 @@ env/
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
 
 # Compiled files
 *.so
@@ -44,3 +45,9 @@ htmlcov/
 # Temporary files
 *.tmp
 *.bak
+
+attendance_reports/
+student_reports/
+
+*.xlsx
+*.csv
